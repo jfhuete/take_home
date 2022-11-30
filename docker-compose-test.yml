@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  db_test:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    env_file:
+      - .env_test
+    ports:
+      - $POSTGRES_PORT:$POSTGRES_PORT
+  api_test:
+    build:
+      context: ./
+      dockerfile: ./docker/api_test.dockerfile
+    command: /scripts/container_test.sh
+    env_file:
+      - .env_test
+    volumes:
+      - ./api/:/app
+      - ./scripts/:/scripts

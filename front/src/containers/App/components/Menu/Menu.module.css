@@ -1,0 +1,8 @@
+.MenuContainer {
+    height: var(--content-height);
+    background-color: var(--background-menu-color);
+}
+
+.menuItems {
+    height: 2rem;
+}

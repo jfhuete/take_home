@@ -1,0 +1,15 @@
+.AppHeader {
+    background-color: var(--background-primary-color);
+    color: var(--text-primary-color);
+    height: 5rem;
+    font-size: 2rem;
+    padding-top: 1.2rem;
+    padding-left: 1.2rem;
+}
+
+.AppContent {
+    width: 100rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    padding: 2rem;
+}

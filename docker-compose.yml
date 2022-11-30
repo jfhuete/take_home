@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - $POSTGRES_PORT:$POSTGRES_PORT
+  api:
+    build:
+      context: ./
+      dockerfile: ./docker/api.dockerfile
+    command: python manage.py runserver $APP_HOST:$APP_PORT
+    env_file:
+      - .env
+    depends_on:
+      - db
+    volumes:
+      - ./api/:/app
+    ports:
+      - $APP_PORT:$APP_PORT
+  front:
+    build:
+      context: ./
+      dockerfile: ./docker/front.dockerfile
+    command: npm run start
+    env_file:
+      - .env
+    depends_on:
+      - api
+    volumes:
+      - ./front/:/app
+    ports:
+      - $REACT_APP_SERVER_PORT:$REACT_APP_SERVER_PORT
